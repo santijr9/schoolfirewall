@@ -1,4 +1,4 @@
-LEEME
+# LEEME
 
 SANTI GIMENO.  Agosto 2018. 	gimeno.profe@gmail.com
 
@@ -21,17 +21,17 @@ INSTRUCCIONES DE IMPLANTACIÓN
 -----------------------------
 
 
-1. setuidar IPTABLES:
+## 1. setuidar IPTABLES:
 
 	Tendremos que setuidar el ejecutable /sbin/iptables
 
-		`chmod u+s /sbin/iptables`
+		chmod u+s /sbin/iptables
 
 		(En nuestro caso el fichero /sbin/xtables-multi)
 
 
 
-2. Activar enrutamiento
+## 2. Activar enrutamiento
 
 	`echo 1 > /proc/sys/net/ipv4/ip_forward`
 
@@ -41,7 +41,7 @@ Esta activación se borra cuando se apaga el equipo, ya que el directorio /proc 
 
 
 
-3. Inicio / Reinicio Firewall:
+## 3. Inicio / Reinicio Firewall:
 
 Lanzamos en el rc.local un script en cada inicio/reinicio de la máquina, que activa el enrutamiento NAT, y prepara las reglas de salida al moodle, dns y demás cosas que queramos tener siempre permitidas.:
 
@@ -51,7 +51,7 @@ nano /etc/rc.local
 	exit 0
 
 
-4. inicia.sh
+## 4. inicia.sh
 
 En este fichero definimos que va a realizar nuestro firewall al iniciar el dia. Cada centro deberá adaptar sus rangos de red y reglas. El contenido de dicho script debe tener todas las rutas absolutas, para evitar problemas de ejecución desde el CRON. Por ejemplo:
 
@@ -73,7 +73,7 @@ La ultima regla drop, para denegar todo el trafico de un aula. (Cada aula tiene 
  
 
 
-5. CRON
+## 5. CRON
 
 Añadimos en el CRON la ejecución del script inicia.sh para que a las horas que deseemos se cierre el internet de las aulas automáticamente. En nuestro caso, lo ejecutamos a las 8.00 que inician las clases, y a las 11.00 justo al finalizar el descanso.
 
@@ -81,7 +81,7 @@ Añadimos en el CRON la ejecución del script inicia.sh para que a las horas que
 
 
 
-6. APLICATIVO PHP EN DETALLE
+## 6. APLICATIVO PHP EN DETALLE
 
 Firewall.php
 	Esta página lee las reglas actuales y permite al professor activar o desactivar el internet del aula.
