@@ -1,4 +1,4 @@
-README.txt
+LEEME
 
 SANTI GIMENO.  Agosto 2018. 	gimeno.profe@gmail.com
 
