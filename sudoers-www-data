@@ -1,0 +1,3 @@
+# Fichero: /etc/sudoers.d/www-data-nft
+# Permite a www-data gestionar sets nftables desde el panel web
+www-data ALL=(root) NOPASSWD: /usr/sbin/nft add element ip filter abiertas *, /usr/sbin/nft add element ip filter cerradas *, /usr/sbin/nft add element ip filter solo_moodle *, /usr/sbin/nft delete element ip filter abiertas *, /usr/sbin/nft delete element ip filter cerradas *, /usr/sbin/nft delete element ip filter solo_moodle *, /usr/sbin/nft list set ip filter abiertas, /usr/sbin/nft list set ip filter cerradas, /usr/sbin/nft list set ip filter solo_moodle, /usr/sbin/nft list set ip filter whitelist

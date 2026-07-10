@@ -1,0 +1,49 @@
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+table ip nat {
+    chain postrouting {
+        type nat hook postrouting priority srcnat; policy accept;
+        oifname "eth0" masquerade
+    }
+}
+
+table ip filter {
+    set whitelist {
+        type ipv4_addr
+        flags interval
+        auto-merge
+    }
+
+    set abiertas {
+        type ipv4_addr
+        flags interval
+        auto-merge
+    }
+
+    set cerradas {
+        type ipv4_addr
+        flags interval
+        auto-merge
+    }
+
+    set solo_moodle {
+        type ipv4_addr
+        flags interval
+        auto-merge
+    }
+
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+
+        ct state established,related accept
+
+        ip saddr @abiertas accept
+
+        ip saddr @solo_moodle udp dport 53 accept
+        ip saddr @solo_moodle tcp dport 443 ip daddr @whitelist accept
+
+        ip saddr @cerradas drop
+    }
+}
