@@ -24,6 +24,57 @@ pasa a través de `FORWARD`:
 - Se necesita `ip_forward = 1` y MASQUERADE (ya incluido en `inicia.sh`)
 - DHCP/DNS deben apuntar a este servidor como gateway desde cada subnet
 
+#### Rutas múltiples (varias interfaces / VLANs)
+
+Si cada aula está en una VLAN con su propio interfaz físico y cada VLAN tiene
+una puerta de enlace distinta aguas arriba, el ruteo por tabla única (`main`)
+no basta. Necesitas **policy routing** para que las respuestas vuelvan por el
+interfaz correcto.
+
+**1. Añadir tablas en `/etc/iproute2/rt_tables`:**
+
+```
+1 INFO1
+2 INFO2
+3 INFO3
+4 INFO4
+5 INFO5
+6 INFO6
+```
+
+**2. Crear reglas y rutas por cada subnet.** Ejemplo para dos VLANs:
+
+```bash
+ip rule add from 172.29.232.0/25 table INFO1
+ip route add default via 192.168.88.1 dev eth1 table INFO1
+ip route add 172.29.232.0/25 via 192.168.88.2 dev eth1 table INFO1
+
+ip rule add from 172.29.232.128/25 table INFO2
+ip route add default via 192.168.88.1 dev eth2 table INFO2
+ip route add 172.29.232.128/25 via 192.168.88.2 dev eth2 table INFO2
+```
+
+**3. Automatizarlo** con un script en `/etc/network/if-up.d/` para que se
+restaure al reiniciar la red o al levantar las interfaces:
+
+```bash
+#!/bin/sh
+if [ "$IFACE" = "eth1" ]; then
+    ip rule add from 172.29.232.0/25 table INFO1
+    ip route add default via 192.168.88.1 dev eth1 table INFO1
+    ip route add 172.29.232.0/25 via 192.168.88.2 dev eth1 table INFO1
+fi
+if [ "$IFACE" = "--all" ]; then
+    ip rule add from 172.29.232.128/25 table INFO2
+    ip route add default via 192.168.88.1 dev eth2 table INFO2
+    ip route add 172.29.232.128/25 via 192.168.88.2 dev eth2 table INFO2
+fi
+```
+
+> Sin policy routing los paquetes de salida salen correctamente por su interfaz,
+> pero las respuestas de vuelta intentan volver por la ruta por defecto de la
+> tabla `main` en lugar del interfaz correcto, rompiendo la conectividad.
+
 ### Modo bridge firewall (transparente)
 
 El servidor se coloca entre el router de salida y el switch de aulas sin cambiar
@@ -35,6 +86,8 @@ direcciones IP:
 
 - `inicia.sh` usa las mismas reglas en `FORWARD`
 - **No es necesario** `ip_forward` ni MASQUERADE (el router existente hace NAT)
+- **No necesita policy routing** — el bridge es transparente, no enruta; el router
+  existente sigue gestionando el tráfico de cada VLAN como siempre
 - Solo deben cambiarse las interfaces de bridge por las reales (no aplica en este script)
 
 ---
