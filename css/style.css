@@ -1,0 +1,81 @@
+body {
+  font-family: 'Myriad Pro', 'Trebuchet MS', sans-serif;
+  background: #137f4f;
+}
+
+h1 {
+  color: black;
+  font-size: 20px;
+  margin: 0 0 15px;
+  text-shadow: 0px -1px rgba(0, 0, 0, 0.5);
+}
+
+h3 {
+  color: white;
+}
+
+.login {
+  width: auto;
+  display: inline-block;
+  background-color: #1ea167;
+  border-radius: 5px;
+  padding: 20px;
+  background-image: -webkit-linear-gradient(90deg, #168d59, #1ea167);
+  position: absolute;
+  left: 50%;
+  top: 100px;
+  transform: translateX(-50%);
+  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2) inset, 0px 0px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+table.aulas {
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+table.aulas td {
+  vertical-align: middle;
+  padding: 6px 10px;
+}
+
+table.aulas td.aula-nombre {
+  text-align: left;
+  font-weight: bold;
+  color: black;
+}
+
+table.aulas td.aula-icono {
+  text-align: center;
+}
+
+table.aulas td.aula-estado {
+  text-align: center;
+  color: black;
+}
+
+table.aulas td.aula-botones {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn {
+  margin: 3px;
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: bold;
+  border: 0;
+  text-shadow: 0px 1px 0px rbga(255, 255, 255, 1);
+  background-color: #f6ba35;
+  background-image: -webkit-linear-gradient(90deg, #eca418, #ffcd4e);
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  color: black;
+}
+
+.btn:hover {
+  background-image: -webkit-linear-gradient(90deg, #ffcd4e, #eca418);
+}

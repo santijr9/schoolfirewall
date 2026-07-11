@@ -1,0 +1,17 @@
+{
+  "aulas": [
+    {"id": 1,  "chain": "AULA1_CTRL",  "red": "192.168.88.0/24",      "nombre": "Aula 1 - LAN (192.168.88.0/24)"},
+    {"id": 3,  "chain": "AULA3_CTRL",  "red": "172.29.232.0/25",     "nombre": "Aula 3 (172.29.232.0/25)"},
+    {"id": 4,  "chain": "AULA4_CTRL",  "red": "172.29.232.128/25",   "nombre": "Aula 4 (172.29.232.128/25)"},
+    {"id": 5,  "chain": "AULA5_CTRL",  "red": "172.29.231.0/25",     "nombre": "Aula 5 (172.29.231.0/25)"},
+    {"id": 6,  "chain": "AULA6_CTRL",  "red": "172.29.228.128/25",   "nombre": "Aula 6 (172.29.228.128/25)"},
+    {"id": 8,  "chain": "AULA8_CTRL",  "red": "172.29.225.128/25",   "nombre": "Aula 8 (172.29.225.128/25)"},
+    {"id": 9,  "chain": "AULA9_CTRL",  "red": "172.29.228.0/25",     "nombre": "Aula 9 (172.29.228.0/25)"},
+    {"id": 10, "chain": "AULA10_CTRL", "red": "172.29.229.128/25",   "nombre": "Aula 10 (172.29.229.128/25)"},
+    {"id": 11, "chain": "AULA11_CTRL", "red": "172.29.227.128/25",   "nombre": "Aula 11 (172.29.227.128/25)"},
+    {"id": 12, "chain": "AULA12_CTRL", "red": "172.29.229.0/25",     "nombre": "Aula 12 (172.29.229.0/25)"},
+    {"id": 13, "chain": "AULA13_CTRL", "red": "172.29.231.128/25",   "nombre": "Aula 13 (172.29.231.128/25)"},
+    {"id": 14, "chain": "AULA14_CTRL", "red": "172.29.230.0/25",     "nombre": "Aula 14 (172.29.230.0/25)"},
+    {"id": 15, "chain": "AULA15_CTRL", "red": "172.29.230.128/25",   "nombre": "Aula 15 (172.29.230.128/25)"}
+  ]
+}
